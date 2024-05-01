@@ -1,0 +1,43 @@
+CREATE TABLE musician(
+    id INT PRIMARY KEY,
+    name VARCHAR(20),
+    city VARCHAR(20),
+    street  VARCHAR(20),
+    phone VARCHAR(20)
+);
+CREATE TABLE instrument(
+    name VARCHAR(20) PRIMARY KEY,
+    musical_key VARCHAR(20)
+);
+CREATE TABLE song(
+    title VARCHAR(20) PRIMARY KEY,
+    author VARCHAR(20)
+);
+CREATE TABLE album(
+    title VARCHAR(20),
+    copyright_date DATE,
+    ablum_id INT,
+    producer_id int,
+    CONSTRAINT pk_common PRIMARY KEY(ablum_id,producer_id),
+    FOREIGN KEY(producer_id) REFERENCES musician(id)
+);
+CREATE TABLE musician_instrument(
+    musician_id INT , 
+    instrument_name VARCHAR(20),
+    CONSTRAINT pk_common PRIMARY KEY(musician_id,instrument_name),
+    FOREIGN KEY(instrument_name) REFERENCES instrument(name)
+);
+CREATE TABLE musician_song(
+    title VARCHAR(20) PRIMARY KEY,
+    musician_id int,
+    FOREIGN KEY(musician_id) REFERENCES musician(id)
+
+);
+
+CREATE TABLE song_album(
+
+    song_title VARCHAR(20) PRIMARY KEY,
+    album_id INT,
+    FOREIGN KEY (song_title) REFERENCES song(title)
+    
+);
